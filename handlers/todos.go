@@ -8,31 +8,31 @@ import (
 )
 
 type Todos struct {
-	Id string `json:"id"`
-	Title string `json:"title"`
-	IsDone bool `isDone:"isDone"`
+	Id     string `json:"id"`
+	Title  string `json:"title"`
+	IsDone bool   `isDone:"isDone"`
 }
 
 var todos = []Todos{
 	{
-		Id: "1",
-		Title: "Cuci tangan",
+		Id:     "1",
+		Title:  "Cuci tangan",
 		IsDone: true,
 	},
 	{
-		Id: "2",
-		Title: "Jaga jarak",
+		Id:     "2",
+		Title:  "Jaga jarak",
 		IsDone: false,
 	},
 }
 
-func FindTodos(w http.ResponseWriter, r *http.Request){
+func FindTodos(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(todos)
 }
 
-func GetTodo(w http.ResponseWriter, r *http.Request){
+func GetTodo(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 	id := params["id"]
@@ -46,7 +46,7 @@ func GetTodo(w http.ResponseWriter, r *http.Request){
 			todoData = todo
 		}
 	}
-	
+
 	if isGetTodo == false {
 		w.WriteHeader(http.StatusNotFound)
 		json.NewEncoder(w).Encode("ID: " + id + " not found")
@@ -57,7 +57,7 @@ func GetTodo(w http.ResponseWriter, r *http.Request){
 	json.NewEncoder(w).Encode(todoData)
 }
 
-func CreateTodo(w http.ResponseWriter, r *http.Request){
+func CreateTodo(w http.ResponseWriter, r *http.Request) {
 	var data Todos
 
 	json.NewDecoder(r.Body).Decode(&data)
@@ -69,7 +69,7 @@ func CreateTodo(w http.ResponseWriter, r *http.Request){
 	json.NewEncoder(w).Encode(todos)
 }
 
-func UpdateTodo(w http.ResponseWriter, r *http.Request){
+func UpdateTodo(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id := params["id"]
 	var data Todos
@@ -95,7 +95,7 @@ func UpdateTodo(w http.ResponseWriter, r *http.Request){
 	json.NewEncoder(w).Encode(todos)
 }
 
-func DeleteTodo(w http.ResponseWriter, r *http.Request){
+func DeleteTodo(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id := params["id"]
 	var isGetTodo = false
