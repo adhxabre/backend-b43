@@ -1,0 +1,4 @@
+install:
+npm i -g nodemon
+
+nodemon --exec go run main.go
