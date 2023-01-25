@@ -1,10 +1,11 @@
 package main
 
 import (
+	"dumbmerch/routes"
 	"fmt"
 	"net/http"
+
 	"github.com/gorilla/mux"
-	"dumbmerch/routes"
 )
 
 func main() {
@@ -15,4 +16,3 @@ func main() {
 	fmt.Println("server running localhost:5000")
 	http.ListenAndServe("localhost:5000", r)
 }
-
