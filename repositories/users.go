@@ -50,6 +50,7 @@ func (r *repository) UpdateUser(user models.User) (models.User, error) {
 
 func (r *repository) DeleteUser(user models.User) (models.User, error) {
 	// Using "Delete" method here ...
+	err := r.db.Delete(&user).Error
 
 	return user, err
 }
